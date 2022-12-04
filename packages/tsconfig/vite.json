@@ -8,7 +8,6 @@
       "ESNext",
       "DOM"
     ],
-    "jsx": "Preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
     "noEmit": true,

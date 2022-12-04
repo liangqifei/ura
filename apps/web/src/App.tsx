@@ -1,9 +1,14 @@
+import { UraButton, UraConfigProvider } from "ui";
+import "ui/src/components/button/style";
 import { defineComponent } from "vue";
-
 export default defineComponent({
   setup() {
     return () => {
-      return <div>hello world</div>;
+      return (
+        <UraConfigProvider prefixCls="ura">
+          <UraButton></UraButton>
+        </UraConfigProvider>
+      );
     };
   },
 });

@@ -1,2 +1,2 @@
 // utils
-export { createProxy } from "./utils/proxy";
+export { createProxy } from "./src/utils/proxy";

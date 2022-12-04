@@ -3,9 +3,11 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
 import { defineConfig, loadEnv } from "vite";
+// import { createProxy } from "../../packages/web-vite-build/index";
 export function pathResolve(path: string, dir: string) {
   return resolve(path, ".", dir);
 }
+// createProxy([]);
 const root = process.cwd();
 const aliasPathSrc = pathResolve(root, "src") + "/";
 export default defineConfig(({ command, mode }) => {
@@ -17,7 +19,6 @@ export default defineConfig(({ command, mode }) => {
     "VITE_"
   );
   const proxyList = JSON.parse(VITE_PROXY);
-
   return {
     root,
     base: VITE_PUBLIC_PATH,
@@ -36,10 +37,17 @@ export default defineConfig(({ command, mode }) => {
         generateScopedName: "[name]__[local]___[hash:base64:5]",
         hashPrefix: "prefix",
       },
-      preprocessorOptions: {},
+      preprocessorOptions: {
+        less: {
+          javascriptEnabled: true,
+          modifyVars: {
+            "@ant-prefix": "ura",
+          },
+        },
+      },
     },
     server: {
-      port: "9999",
+      port: "8888",
       // proxy: createProxy(proxyList),
     },
     plugins: [vue(), vueJsx()],

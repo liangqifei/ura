@@ -12,5 +12,11 @@
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.2"
+  },
+  "dependencies": {
+    "@types/lodash-es": "^4.17.6",
+    "ant-design-vue": "^3.2.15",
+    "lodash-es": "^4.17.21",
+    "vue": "^3.2.45"
   }
 }
