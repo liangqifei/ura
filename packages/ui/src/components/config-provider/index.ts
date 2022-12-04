@@ -1,8 +1,4 @@
-import { withInstall } from "../../utils";
-import ConfigProvider from "./config-provider";
+// import ConfigProvider from "./config-provider";
+import ConfigProvider from "ant-design-vue/es/config-provider";
 
-export * from "./config-provider";
-export * from "./types/props";
-export const UraConfigProvider = withInstall(ConfigProvider);
-
-export default UraConfigProvider;
+export { ConfigProvider as UraConfigProvider };
