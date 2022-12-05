@@ -16,6 +16,9 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.2.0",
     "@vitejs/plugin-vue-jsx": "^2.1.1",
+    "@zougt/some-loader-utils": "^1.4.3",
+    "@zougt/vite-plugin-theme-preprocessor": "^1.4.8",
+    "color": "^4.2.3",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "less": "^4.1.3",
