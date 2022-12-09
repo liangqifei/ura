@@ -4,31 +4,41 @@ import {
   UraLayoutContent,
   UraLayoutFooter,
   UraLayoutHeader,
+  UraLayoutSider,
 } from "ui";
 import "ui/src/components/button/style";
 import "ui/src/components/layout/style";
-import { defineComponent, ref } from "vue";
-import { changeThemeHooks } from '../hooks/use-theme'
+import { defineComponent } from "vue";
+import LeftSection from "../../lib/left";
+// import { changeThemeHooks } from "../hooks/use-theme";
 // const UraLayoutHeader = UraLayout.Header;
 // "@setCustomTheme" from themePreprocessorPlugin,Color is essential in setCustomTheme method.
 export default defineComponent({
   setup() {
     return () => {
-      const { changeTheme, themes } = changeThemeHooks()
+      // const { changeTheme, themes } = changeThemeHooks();
       return (
         <UraLayout>
-          {/* <UraLayoutSider></UraLayoutSider> */}
-          <div onClick={() => { changeTheme(themes.default) }}>
+          <UraLayoutSider>
+            <LeftSection></LeftSection>
+          </UraLayoutSider>
+          {/* <div
+            onClick={() => {
+              changeTheme(themes.mauve);
+            }}
+          >
             且ussssssss换
-          </div>
-          <UraLayoutHeader>
-            <div >HeaderHeaderHeader</div>
-          </UraLayoutHeader>
-          <UraLayoutContent>
-            <div>sksksks</div>
-            <UraButton></UraButton>
-          </UraLayoutContent>
-          <UraLayoutFooter>Footer</UraLayoutFooter>
+          </div> */}
+          <UraLayout>
+            <UraLayoutHeader>
+              <div>HeaderHeaderHeader</div>
+            </UraLayoutHeader>
+            <UraLayoutContent>
+              <div>sksksks</div>
+              <UraButton></UraButton>
+            </UraLayoutContent>
+            <UraLayoutFooter>Footer</UraLayoutFooter>
+          </UraLayout>
         </UraLayout>
       );
     };

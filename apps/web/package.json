@@ -25,6 +25,7 @@
     "tsconfig": "workspace:*",
     "typescript": "^4.6.4",
     "vite": "^3.0.0",
+    "vue-types": "^5.0.1",
     "web-vite-build": "workspace:*"
   }
 }
