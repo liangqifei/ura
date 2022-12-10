@@ -1,5 +1,4 @@
 import { Button, Input, Row } from "ant-design-vue";
-
 type ComponentsType = "pager" | "block" | "normal";
 const registerMaps = {} as { [k: string]: ComponentsItem };
 const registerList: ComponentsItem[] = [];
@@ -40,7 +39,7 @@ type PreviewOptions = {
 
 registerComponents({
   componentsKey: "ura-button",
-  render: (props) => <Button>{props.text}</Button>,
+  render: (props) => <Button {...props}>{props.text}</Button>,
   type: "normal",
   props: {
     type: "primary",

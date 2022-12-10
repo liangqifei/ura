@@ -10,7 +10,9 @@
     "lint": "TIMING=1 eslint \"src/**/*.ts\""
   },
   "dependencies": {
+    "@types/lodash-es": "^4.17.6",
     "ant-design-vue": "^3.2.15",
+    "lodash-es": "^4.17.21",
     "vue": "^3.2.45",
     "vuedraggable": "^4.1.0"
   },

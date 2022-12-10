@@ -11,20 +11,16 @@ export default defineComponent({
       return (
         <div>
           {/* {NestedDraggable22(headerList)} */}
-          {headerList.map((config) => {
+          {headerList.map((config, index) => {
             return (
               <div class="left-edit-card">
                 <div class="title">{config.preview.text}</div>
                 <div class="content">
-                  <div class="handle">1111111</div>
                   <draggable
                     list={[config]}
                     sort={false}
                     group={{ name: "g1", pull: "clone", put: false }}
-                    item-key="componentsKey"
-                    onClone={(aaa) => {
-                      console.log(aaa);
-                    }}
+                    item-key="index"
                     v-slots={{
                       item: ({ element }) => {
                         const config = element;

@@ -8,9 +8,8 @@ export default defineComponent({
   setup() {
     return () => (
       <div class="edit-right-section">
-        {editComdata.value.componentsKey}
         <div>
-          {editComdata.value.componentsKey == "ura-button" && <ButtonConfig />}
+          {editComdata.data.componentsKey == "ura-button" && <ButtonConfig />}
         </div>
       </div>
     );

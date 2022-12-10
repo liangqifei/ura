@@ -1,8 +1,9 @@
-import { ref } from "vue";
+import { reactive } from "vue";
 
-export const editComdata = ref({});
+export const editComdata = reactive({
+  data: {},
+});
 
-export const initRightData = (data) => {
-  console.log(data);
-  editComdata.value = data;
+export const initRightData = (data, index) => {
+  editComdata.data = data;
 };
