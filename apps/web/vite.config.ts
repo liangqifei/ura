@@ -55,7 +55,7 @@ export default defineConfig(({ command, mode }) => {
         less: {
           javascriptEnabled: true,
           modifyVars: {
-            "@ant-prefix": "ura",
+            // "@ant-prefix": "ant",
           },
         },
       },

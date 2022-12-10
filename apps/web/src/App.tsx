@@ -1,13 +1,14 @@
-import { UraConfigProvider } from "ui";
+import { ConfigProvider } from "ant-design-vue";
 import { defineComponent } from "vue";
-import LayoutCom from "./layout/default";
+import EditorPage from "./lib/edit";
+
 export default defineComponent({
   setup() {
     return () => {
       return (
-        <UraConfigProvider prefixCls="ura">
-          <LayoutCom></LayoutCom>
-        </UraConfigProvider>
+        <ConfigProvider>
+          <EditorPage></EditorPage>
+        </ConfigProvider>
       );
     };
   },

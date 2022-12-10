@@ -61,5 +61,3 @@ export type UraButtonProps = {
 export const uraButtonProps = {
   ...buttonProps(),
 } as UraButtonProps;
-
-export const uraButtonPropsFn = () => uraButtonProps;

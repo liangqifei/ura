@@ -10,8 +10,9 @@
     "lint": "TIMING=1 eslint \"src/**/*.ts\""
   },
   "dependencies": {
-    "ui": "workspace:*",
-    "vue": "^3.2.45"
+    "ant-design-vue": "^3.2.15",
+    "vue": "^3.2.45",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.2.0",
@@ -25,7 +26,6 @@
     "tsconfig": "workspace:*",
     "typescript": "^4.6.4",
     "vite": "^3.0.0",
-    "vue-types": "^5.0.1",
-    "web-vite-build": "workspace:*"
+    "vue-types": "^5.0.1"
   }
 }

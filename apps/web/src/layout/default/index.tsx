@@ -1,13 +1,11 @@
 import {
-  UraButton,
-  UraLayout,
-  UraLayoutContent,
-  UraLayoutFooter,
-  UraLayoutHeader,
-  UraLayoutSider,
-} from "ui";
-import "ui/src/components/button/style";
-import "ui/src/components/layout/style";
+  Button,
+  Layout,
+  LayoutContent,
+  LayoutFooter,
+  LayoutHeader,
+  LayoutSider,
+} from "ant-design-vue";
 import { defineComponent } from "vue";
 import LeftSection from "../../lib/left";
 // import { changeThemeHooks } from "../hooks/use-theme";
@@ -18,10 +16,10 @@ export default defineComponent({
     return () => {
       // const { changeTheme, themes } = changeThemeHooks();
       return (
-        <UraLayout>
-          <UraLayoutSider>
+        <Layout>
+          <LayoutSider>
             <LeftSection></LeftSection>
-          </UraLayoutSider>
+          </LayoutSider>
           {/* <div
             onClick={() => {
               changeTheme(themes.mauve);
@@ -29,17 +27,17 @@ export default defineComponent({
           >
             且ussssssss换
           </div> */}
-          <UraLayout>
-            <UraLayoutHeader>
+          <Layout>
+            <LayoutHeader>
               <div>HeaderHeaderHeader</div>
-            </UraLayoutHeader>
-            <UraLayoutContent>
+            </LayoutHeader>
+            <LayoutContent>
               <div>sksksks</div>
-              <UraButton></UraButton>
-            </UraLayoutContent>
-            <UraLayoutFooter>Footer</UraLayoutFooter>
-          </UraLayout>
-        </UraLayout>
+              <Button></Button>
+            </LayoutContent>
+            <LayoutFooter>Footer</LayoutFooter>
+          </Layout>
+        </Layout>
       );
     };
   },
