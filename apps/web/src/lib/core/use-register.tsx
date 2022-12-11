@@ -1,4 +1,3 @@
-import { Button, Input, Row } from "ant-design-vue";
 type ComponentsType = "pager" | "block" | "normal";
 const registerMaps = {} as { [k: string]: ComponentsItem };
 const registerList: ComponentsItem[] = [];
@@ -30,6 +29,8 @@ export type ComponentsItem = {
   render: (props?: any) => JSX.Element;
   type: ComponentsType;
   preview: PreviewOptions;
+  props?: any;
+  childrens?: ComponentsItem[];
 };
 type PreviewOptions = {
   text?: string;

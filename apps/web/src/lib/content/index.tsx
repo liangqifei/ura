@@ -1,6 +1,6 @@
 import { Layout } from "ant-design-vue";
 import { cloneDeep } from "lodash-es";
-import { defineComponent, isReactive, reactive } from "vue";
+import { defineComponent, reactive } from "vue";
 import draggable from "vuedraggable";
 import { editComdata } from "../right/use-right";
 import { useContentHooks } from "./use-content";
@@ -21,20 +21,27 @@ export default defineComponent({
 
     const NestedDraggableItem = ({ element, index }) => {
       const propsaa = element.props;
-      const RenderCom = element.render(propsaa);
-      console.log(isReactive(element))
+      const RenderCom = element.render();
+      console.log(element.props);
       return (
-        <div>
+        <div style="padding:10px;solid 1px red ">
           <RenderCom
             onClick={(e) => {
               e.stopPropagation();
-              editComdata.value = element
+              editComdata.value = element;
               //当前的数据和key传递给右侧
             }}
-          />
-          {element?.type == "normal"
-            ? ""
-            : NestedDraggable22(element.childrens)}
+            {...element.props}
+            v-slots={{
+              default: () => {
+                return (
+                  element.type !== "normal" &&
+                  NestedDraggable22(element.childrens)
+                );
+              },
+            }}
+          ></RenderCom>
+          {/* {element.type !== "block" && NestedDraggable22(element.childrens)} */}
         </div>
       );
     };
@@ -65,7 +72,7 @@ export default defineComponent({
         <Layout>
           <LayoutContent>
             {NestedDraggable22(stateJson.pageObj.childrens)}
-            {JSON.stringify(stateJson)}
+            {console.log(stateJson)}
           </LayoutContent>
         </Layout>
       );

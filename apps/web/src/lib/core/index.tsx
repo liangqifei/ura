@@ -1,10 +1,29 @@
-import { Button, Input, Row } from "ant-design-vue";
+import { Button, Form, Input, Row } from "ant-design-vue";
+import buttonProps from "ant-design-vue/lib/button/buttonTypes";
+import { defineComponent } from "vue";
 import { registerComponents } from "./use-register";
+const UraButton = defineComponent({
+  props: {
+    text: {},
+    ...buttonProps(),
+  },
+  inheritAttrs: false,
+  setup(props, { attrs }) {
+    console.log(props);
+    return () => {
+      return (
+        <Button {...props} {...attrs}>
+          {props.text}
+        </Button>
+      );
+    };
+  },
+});
 
 registerComponents({
   componentsKey: "ura-button",
-  render: (props) => <Button {...props}>{props.text}</Button>,
-  type: "normal",
+  render: () => <UraButton></UraButton>,
+  type: "block",
   props: {
     type: "primary",
     text: "primaryprimaryprimary",
@@ -29,8 +48,6 @@ registerComponents({
   },
 });
 
-
-
 registerComponents({
   componentsKey: "ura-row",
   type: "block",
@@ -38,6 +55,28 @@ registerComponents({
   childrens: [],
   preview: {
     text: "Dragger容器组件",
+    render: () => <div>Row组件，只能拖动到该容器组件</div>,
+  },
+});
+
+registerComponents({
+  componentsKey: "ura-form",
+  type: "block",
+  render: () => <Form></Form>,
+  childrens: [],
+  preview: {
+    text: "Form容器组件",
+    render: () => <div>Row组件，只能拖动到该容器组件</div>,
+  },
+});
+
+registerComponents({
+  componentsKey: "ura-form-item",
+  type: "block",
+  render: () => <Form.Item></Form.Item>,
+  childrens: [],
+  preview: {
+    text: "FormItem容器组件",
     render: () => <div>Row组件，只能拖动到该容器组件</div>,
   },
 });
