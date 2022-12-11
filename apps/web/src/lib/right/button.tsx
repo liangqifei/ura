@@ -2,29 +2,20 @@ import { Button, Form, Input, Radio, RadioGroup } from "ant-design-vue";
 import { defineComponent, reactive, watch } from "vue";
 import { editComdata } from "../right/use-right";
 
+
 export const ButtonConfig = defineComponent({
   name: "ButtonConfig",
 
   setup: (props) => {
     const state = reactive({
-      props: editComdata.data.props,
+      props: editComdata.value.props,
     });
 
-    watch(
-      () => editComdata.data,
-      (oldValue, newValue) => {
-        console.log("change1111");
-        state.props = newValue.props;
-      },
-      {
-        deep: true,
-      }
-    );
 
     return () => {
       return (
         <div>
-          {JSON.stringify(state.props)}
+          {JSON.stringify(editComdata.data)}
           <Form layout="vertical">
             <Form.Item label="文本内容">
               <Input vModel={[state.props.text, "value"]}></Input>

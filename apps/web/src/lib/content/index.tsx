@@ -1,8 +1,8 @@
 import { Layout } from "ant-design-vue";
 import { cloneDeep } from "lodash-es";
-import { defineComponent, reactive } from "vue";
+import { defineComponent, isReactive, reactive } from "vue";
 import draggable from "vuedraggable";
-import { initRightData } from "../right/use-right";
+import { editComdata } from "../right/use-right";
 import { useContentHooks } from "./use-content";
 // import { changeThemeHooks } from "../../layout/hooks/use-theme";
 const LayoutContent = Layout.Content;
@@ -19,29 +19,16 @@ export default defineComponent({
       },
     });
 
-    // watch(
-    //   () => stateJson,
-    //   (old, newaa) => {
-    //     if (!isEqual(copyData, newaa)) {
-    //       const data = cloneDeep(newaa.childrens);
-    //       const data2 = cloneDeep(newaa.childrens);
-    //       copyData.childrens = data;
-    //       stateJson.childrens = data2;
-    //       console.log(1);
-    //     }
-    //   },
-    //   { deep: true }
-    // );
-
     const NestedDraggableItem = ({ element, index }) => {
       const propsaa = element.props;
       const RenderCom = element.render(propsaa);
+      console.log(isReactive(element))
       return (
         <div>
           <RenderCom
             onClick={(e) => {
               e.stopPropagation();
-              initRightData(element, index);
+              editComdata.value = element
               //当前的数据和key传递给右侧
             }}
           />

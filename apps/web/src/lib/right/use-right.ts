@@ -1,9 +1,14 @@
-import { reactive } from "vue";
-
-export const editComdata = reactive({
-  data: {},
+import { computed, reactive, ref } from "vue";
+import { ComponentsItem } from "../core/use-register";
+const editComdataObj = reactive({
+  data: {} as ComponentsItem
 });
 
-export const initRightData = (data, index) => {
-  editComdata.data = data;
-};
+export const editComdata = computed({
+  get() {
+    return editComdataObj.data
+  },
+  set(value) {
+    editComdataObj.data = value
+  }
+})

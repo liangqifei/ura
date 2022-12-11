@@ -4,10 +4,9 @@ import CenterSection from "../content";
 // import { changeThemeHooks } from "../../layout/hooks/use-theme";
 import LeftSection from "../left";
 import RightSection from "../right";
-
+import '../core'
 const LayoutSider = Layout.Sider;
-const LayoutContent = Layout.Content;
-const LayoutHeader = Layout.Header;
+
 
 export default defineComponent({
   setup() {
