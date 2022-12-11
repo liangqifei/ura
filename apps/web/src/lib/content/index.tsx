@@ -72,7 +72,7 @@ export default defineComponent({
         <Layout>
           <LayoutContent>
             {NestedDraggable22(stateJson.pageObj.childrens)}
-            {console.log(stateJson)}
+            {console.log(JSON.stringify(stateJson))}
           </LayoutContent>
         </Layout>
       );
