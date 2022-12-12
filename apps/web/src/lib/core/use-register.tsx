@@ -4,7 +4,11 @@ const registerList: ComponentsItem[] = [];
 
 export const registerComponents = (config: ComponentsItem) => {
   if (!registerMaps[config.componentsKey]) {
-    registerList.push(config);
+    registerList.push({
+      componentsKey: config.componentsKey,
+      props: config.props || {},
+      childrens: config.childrens || [],
+    });
     registerMaps[config.componentsKey] = config;
   }
 };

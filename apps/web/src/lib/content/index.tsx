@@ -2,7 +2,9 @@ import { Layout } from "ant-design-vue";
 import { cloneDeep } from "lodash-es";
 import { defineComponent, reactive } from "vue";
 import draggable from "vuedraggable";
+import { getRegisterComponents } from "../core/use-register";
 import { editComdata } from "../right/use-right";
+import "./index.less";
 import { useContentHooks } from "./use-content";
 // import { changeThemeHooks } from "../../layout/hooks/use-theme";
 const LayoutContent = Layout.Content;
@@ -20,18 +22,30 @@ export default defineComponent({
     });
 
     const NestedDraggableItem = ({ element, index }) => {
-      const propsaa = element.props;
-      const RenderCom = element.render();
+      const { render, preview } = getRegisterComponents(element.componentsKey);
+      const RenderCom = render();
+      const comProps = element.props;
+
       console.log(element.props);
       return (
-        <div style="padding:10px;solid 1px red ">
+        <div style={{ position: "relative" }}>
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              background: "rgba(0,0,0,0.1)",
+            }}
+          >
+            {preview.text}
+          </div>
           <RenderCom
             onClick={(e) => {
               e.stopPropagation();
               editComdata.value = element;
               //当前的数据和key传递给右侧
             }}
-            {...element.props}
+            {...comProps}
             v-slots={{
               default: () => {
                 return (
@@ -40,8 +54,10 @@ export default defineComponent({
                 );
               },
             }}
-          ></RenderCom>
-          {/* {element.type !== "block" && NestedDraggable22(element.childrens)} */}
+          >
+            {/* {element.type !== "block" && NestedDraggable22(element.childrens)} */}
+            {/* // <div class="comWarpper">// </div> */}
+          </RenderCom>
         </div>
       );
     };
@@ -50,18 +66,17 @@ export default defineComponent({
       return (
         <draggable
           class="dragArea"
-          style="border:solid 1px #000;padding:10px"
           list={list}
           group={{ name: "g1" }}
-          item-key="uid"
+          // item-key="uid"
           onSort={() => {
-            console.log(stateJson.pageObj);
             const data = cloneDeep(stateJson.pageObj);
             stateJson.pageObj = data;
-            console.log(stateJson.pageObj);
           }}
           v-slots={{
-            item: (listItem) => NestedDraggableItem(listItem),
+            item: (listItem) => {
+              return NestedDraggableItem(listItem);
+            },
           }}
         ></draggable>
       );
@@ -70,9 +85,9 @@ export default defineComponent({
     return () => {
       return (
         <Layout>
-          <LayoutContent>
+          <LayoutContent class="edit-content-main">
             {NestedDraggable22(stateJson.pageObj.childrens)}
-            {console.log(JSON.stringify(stateJson))}
+            {JSON.stringify(stateJson)}
           </LayoutContent>
         </Layout>
       );

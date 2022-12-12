@@ -1,6 +1,9 @@
 import { defineComponent } from "vue";
 import draggable from "vuedraggable";
-import { getRegisterComponentsList } from "../core/use-register";
+import {
+  getRegisterComponents,
+  getRegisterComponentsList,
+} from "../core/use-register";
 import "./index.less";
 export default defineComponent({
   name: "left-components-section",
@@ -12,9 +15,10 @@ export default defineComponent({
         <div>
           {/* {NestedDraggable22(headerList)} */}
           {headerList.map((config, index) => {
+            const { preview } = getRegisterComponents(config.componentsKey);
             return (
               <div class="left-edit-card">
-                <div class="title">{config.preview.text}</div>
+                <div class="title">{preview.text}</div>
                 <div class="content">
                   <draggable
                     list={[config]}
@@ -23,8 +27,7 @@ export default defineComponent({
                     item-key="index"
                     v-slots={{
                       item: ({ element }) => {
-                        const config = element;
-                        return config.preview.render && config.preview.render();
+                        return preview.render(element.props);
                       },
                     }}
                   ></draggable>
