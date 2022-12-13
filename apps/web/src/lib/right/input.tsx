@@ -1,76 +1,48 @@
-import { Button, } from "ant-design-vue";
-import { defineComponent, reactive, ref } from "vue";
-import { getRegisterComponents } from "../core/use-register";
-import { editComdata } from "./use-right"
-
+import { Button, Form, Radio, RadioGroup, Switch } from "ant-design-vue";
+import { defineComponent, reactive } from "vue";
+import { editComdata } from "../right/use-right";
 
 export const InputConfig = defineComponent({
   name: "InputConfig",
 
   setup: (props) => {
-
     const state = reactive({
       componentsProps: editComdata.value.props,
-      scheams:[{
-        "componentsKey": "ura-form",
-        "props": {
-  
-        },
-        "childrens":
-          [{
-            "componentsKey": "ura-form-item",
-            "props": {
-              label:"1111"
-            },
-            "childrens": [
-              {
-                "componentsKey": "ura-input",
-                "props": {
-                  'v-model':editComdata.value.props.size, //[,'value']
-                },
-                "childrens": []
-              }]
-          }]
-      }]
     });
-
-   
-
-    const renderItem = (config) => {
-
-      console.log(config)
-      const { componentsKey, props, childrens } = config
-      const { render, type } = getRegisterComponents(componentsKey);
-      const RenderCom = render();
-
-      return (
-        <>
-          <RenderCom
-          {...props}
-            v-slots={{
-              default: () => {
-                return (
-                  type !== "normal" &&
-                  renderList(childrens)
-                );
-              },
-            }}
-          >
-          </RenderCom>
-        </>
-      );
-    };
-
-    const renderList = (list) => {
-      return list && list.map(item => {
-        return renderItem(item)
-      })
-    }
 
     return () => {
       return (
         <div>
-          {renderList(state.scheams)}
+          <Form layout="vertical">
+            <Form.Item label="bordered">
+              <Switch v-model:checked={state.componentsProps.bordered}></Switch>
+            </Form.Item>
+            <Form.Item label="allowClear">
+              <Switch
+                v-model:checked={state.componentsProps.allowClear}
+              ></Switch>
+            </Form.Item>
+            <Form.Item label="disabled">
+              <Switch v-model:checked={state.componentsProps.disabled}></Switch>
+            </Form.Item>
+            <Form.Item label="maxlength">
+              <Input v-model:value={state.componentsProps.maxlength}></Input>
+            </Form.Item>
+            <Form.Item label="size">
+              <RadioGroup vModel={[state.componentsProps.size, "value"]}>
+                <Radio value="large">large</Radio>
+                <Radio value="default">default</Radio>
+                <Radio value="small">small</Radio>
+              </RadioGroup>
+            </Form.Item>
+            <Form.Item label="shape">
+              <RadioGroup vModel={[state.componentsProps.shape, "value"]}>
+                <Radio value="default">default</Radio>
+                <Radio value="circle">circle</Radio>
+                <Radio value="round">round</Radio>
+              </RadioGroup>
+            </Form.Item>
+          </Form>
           <Button>确定</Button>
         </div>
       );

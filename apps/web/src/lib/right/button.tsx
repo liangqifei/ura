@@ -1,22 +1,14 @@
 import { Button, Form, Input, Radio, RadioGroup } from "ant-design-vue";
-import { defineComponent, reactive, watch } from "vue";
+import { defineComponent, reactive } from "vue";
 import { editComdata } from "../right/use-right";
-
 
 export const ButtonConfig = defineComponent({
   name: "ButtonConfig",
 
   setup: (props) => {
-
     const state = reactive({
       componentsProps: editComdata.value.props,
-      scheams: [{
-        componentsKey: 'ua-input',
-        field: '',
-      }]
     });
-
-
 
     return () => {
       return (
