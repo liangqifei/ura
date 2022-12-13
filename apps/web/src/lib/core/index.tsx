@@ -1,24 +1,8 @@
 import { Button, Form, Input, Row } from "ant-design-vue";
-import buttonProps from "ant-design-vue/lib/button/buttonTypes";
-import { defineComponent } from "vue";
+import { UraButton } from "../components/button";
+import {UraInput} from '../components/input'
 import { registerComponents } from "./use-register";
-const UraButton = defineComponent({
-  props: {
-    text: {},
-    ...buttonProps(),
-  },
-  inheritAttrs: false,
-  setup(props, { attrs }) {
-    console.log(props);
-    return () => {
-      return (
-        <Button {...props} {...attrs}>
-          {props.text}
-        </Button>
-      );
-    };
-  },
-});
+
 
 registerComponents({
   componentsKey: "ura-button",
@@ -42,8 +26,8 @@ registerComponents({
   componentsKey: "ura-input",
   render: () => <Input></Input>,
   type: "normal",
-  props: {},
-
+  props: {
+  },
   preview: {
     text: "输入框组件",
     render: () => <Input disabled={true} defaultValue="基础组件"></Input>,
