@@ -8,22 +8,25 @@ import "./index.less";
 import { useContentHooks } from "./use-content";
 // import { changeThemeHooks } from "../../layout/hooks/use-theme";
 const LayoutContent = Layout.Content;
+import { useEditStore } from '../../store/module/edit'
+import { watch } from "fs";
 export default defineComponent({
   components: {
     draggable,
   },
   setup() {
-    const [pager] = useContentHooks();
+    const editStore = useEditStore();
+    console.log(editStore.getCurrentPage)
     const stateJson = reactive({
-      pageObj: {
-        type: "pager",
-        childrens: [],
-      },
+      pageObj: editStore.getCurrentPage,
     });
+    watch(() => stateJson.pageObj, () => {
 
+    })
+    console.log(editStore.getCurrentPage)
     const NestedDraggableItem = ({ element, index }) => {
       const { render, preview } = getRegisterComponents(element.componentsKey);
-      const RenderCom = render();
+      const RenderCom = render;
       const comProps = element.props;
 
       console.log(element.props);
@@ -42,7 +45,8 @@ export default defineComponent({
           <RenderCom
             onClick={(e) => {
               e.stopPropagation();
-              editComdata.value = element;
+              editStore.setCurrentComponents(element)
+              // editComdata.value = element;
               //当前的数据和key传递给右侧
             }}
             {...comProps}
@@ -55,8 +59,6 @@ export default defineComponent({
               },
             }}
           >
-            {/* {element.type !== "block" && NestedDraggable22(element.childrens)} */}
-            {/* // <div class="comWarpper">// </div> */}
           </RenderCom>
         </div>
       );
@@ -69,10 +71,7 @@ export default defineComponent({
           list={list}
           group={{ name: "g1" }}
           // item-key="uid"
-          onSort={() => {
-            const data = cloneDeep(stateJson.pageObj);
-            stateJson.pageObj = data;
-          }}
+
           v-slots={{
             item: (listItem) => {
               return NestedDraggableItem(listItem);
@@ -86,7 +85,7 @@ export default defineComponent({
       return (
         <Layout>
           <LayoutContent class="edit-content-main">
-            {NestedDraggable22(stateJson.pageObj.childrens)}
+            {stateJson.pageObj && NestedDraggable22(stateJson.pageObj.childrens)}
             {JSON.stringify(stateJson)}
           </LayoutContent>
         </Layout>

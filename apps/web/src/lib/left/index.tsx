@@ -15,7 +15,8 @@ export default defineComponent({
         <div>
           {/* {NestedDraggable22(headerList)} */}
           {headerList.map((config, index) => {
-            const { preview } = getRegisterComponents(config.componentsKey);
+            const { preview, render } = getRegisterComponents(config.componentsKey);
+            const RenderEle = render //({ ...preview })
             return (
               <div class="left-edit-card">
                 <div class="title">{preview.text}</div>
@@ -26,8 +27,10 @@ export default defineComponent({
                     group={{ name: "g1", pull: "clone", put: false }}
                     item-key="index"
                     v-slots={{
-                      item: ({ element }) => {
-                        return preview.render(element.props);
+                      item: ({ }) => {
+                        return <div style='padding:10px;border:solid 1px #000'>
+                          <RenderEle {...preview}></RenderEle>
+                        </div>;
                       },
                     }}
                   ></draggable>

@@ -1,13 +1,15 @@
 import { Button, Form, Radio, RadioGroup, Switch } from "ant-design-vue";
 import { defineComponent, reactive } from "vue";
+import { useEditStore } from "../../store/module/edit";
 import { editComdata } from "../right/use-right";
 
 export const InputConfig = defineComponent({
   name: "InputConfig",
 
   setup: (props) => {
+    const editStore = useEditStore()
     const state = reactive({
-      componentsProps: editComdata.value.props,
+      componentsProps: editStore.getCurrentComponentsProps,
     });
 
     return () => {
@@ -27,6 +29,9 @@ export const InputConfig = defineComponent({
             </Form.Item>
             <Form.Item label="maxlength">
               <Input v-model:value={state.componentsProps.maxlength}></Input>
+            </Form.Item>
+            <Form.Item label="hasFormItem">
+              <Switch v-model:checked={state.componentsProps.hasFormItem}></Switch>
             </Form.Item>
             <Form.Item label="size">
               <RadioGroup vModel={[state.componentsProps.size, "value"]}>

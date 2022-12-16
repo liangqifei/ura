@@ -1,19 +1,23 @@
-import { Input } from "ant-design-vue";
+import { Form, Input } from "ant-design-vue";
 import inputProps from "ant-design-vue/lib/input/inputProps";
 import { defineComponent, } from "vue";
 export const UraInput = defineComponent({
   props: {
     ...inputProps(),
-    modelValue:{}
+    hasFormItem: {
+      type: Boolean,
+      default: true
+    }
   },
   inheritAttrs: false,
-  setup(props, { attrs,emit }) {
+  setup(props, { attrs, emit, slots }) {
     return () => {
-      console.log(props,attrs)
-      return (
-        <Input {...props}  {...attrs} onModelValue={[props.modelValue,'value']}>
+      return props.hasFormItem ? <Form.Item>
+        <Input {...props}  {...attrs} v-slots={slots}>
         </Input>
-      );
+      </Form.Item> :
+        <Input {...props}  {...attrs} v-slots={slots}>
+        </Input>
     };
   },
 });

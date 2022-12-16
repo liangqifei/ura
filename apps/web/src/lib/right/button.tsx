@@ -1,15 +1,15 @@
 import { Button, Form, Input, Radio, RadioGroup } from "ant-design-vue";
 import { defineComponent, reactive } from "vue";
 import { editComdata } from "../right/use-right";
-
+import { useEditStore } from '../../store/module/edit'
 export const ButtonConfig = defineComponent({
   name: "ButtonConfig",
 
   setup: (props) => {
+    const editStore = useEditStore()
     const state = reactive({
-      componentsProps: editComdata.value.props,
+      componentsProps: editStore.getCurrentComponentsProps,
     });
-
     return () => {
       return (
         <div>

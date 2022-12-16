@@ -1,12 +1,15 @@
+import { Component } from "vue";
+
 type ComponentsType = "pager" | "block" | "normal";
 const registerMaps = {} as { [k: string]: ComponentsItem };
-const registerList: ComponentsItem[] = [];
+const registerList: ComponentsListItem[] = [];
 
 export const registerComponents = (config: ComponentsItem) => {
   if (!registerMaps[config.componentsKey]) {
     registerList.push({
       componentsKey: config.componentsKey,
       props: config.props || {},
+      type: config.type,
       childrens: config.childrens || [],
     });
     registerMaps[config.componentsKey] = config;
@@ -15,12 +18,9 @@ export const registerComponents = (config: ComponentsItem) => {
 
 export const getRegisterComponents = (
   componentsKey: ComponentsItem["componentsKey"]
-) => {
-  if (registerMaps[componentsKey]) {
-    return registerMaps[componentsKey];
-  }
-  console.error(componentsKey + "没有该组件");
-  return null;
+): ComponentsItem => {
+  return registerMaps[componentsKey];
+
   // return new Error(componentsKey + "没有该组件");
 };
 
@@ -30,14 +30,22 @@ export const getRegisterComponentsList = () => {
 
 export type ComponentsItem = {
   componentsKey: string;
-  render: (props?: any) => JSX.Element;
-  type: ComponentsType;
+  render?: Component;
+  type?: ComponentsType;
   preview: PreviewOptions;
   props?: any;
   childrens?: ComponentsItem[];
 };
+
+export type ComponentsListItem = {
+  componentsKey: string;
+  type?: ComponentsType;
+  props: any;
+  childrens?: ComponentsItem[];
+};
+
 type PreviewOptions = {
   text?: string;
-  options?: any;
-  render?: () => JSX.Element;
+  [k: string]: any
+  // render?: () => unknown;
 };
