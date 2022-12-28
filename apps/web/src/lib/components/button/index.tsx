@@ -8,7 +8,6 @@ export const UraButton = defineComponent({
   },
   inheritAttrs: false,
   setup(props, { attrs, slots }) {
-    console.log(slots);
     return () => {
       return (
         <Button {...props} {...attrs} v-slots={
@@ -17,7 +16,7 @@ export const UraButton = defineComponent({
             icon: props.icon?.()
           }
         }>
-        </Button>
+        </Button >
       );
     };
   },

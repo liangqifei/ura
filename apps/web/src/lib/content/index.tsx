@@ -1,35 +1,26 @@
 import { Layout } from "ant-design-vue";
-import { cloneDeep } from "lodash-es";
 import { defineComponent, reactive } from "vue";
 import draggable from "vuedraggable";
 import { getRegisterComponents } from "../core/use-register";
-import { editComdata } from "../right/use-right";
 import "./index.less";
-import { useContentHooks } from "./use-content";
 // import { changeThemeHooks } from "../../layout/hooks/use-theme";
 const LayoutContent = Layout.Content;
 import { useEditStore } from '../../store/module/edit'
-import { watch } from "fs";
 export default defineComponent({
   components: {
     draggable,
   },
   setup() {
     const editStore = useEditStore();
-    console.log(editStore.getCurrentPage)
     const stateJson = reactive({
       pageObj: editStore.getCurrentPage,
     });
-    watch(() => stateJson.pageObj, () => {
 
-    })
-    console.log(editStore.getCurrentPage)
-    const NestedDraggableItem = ({ element, index }) => {
+    const NestedDraggableItem = ({ element, index }, formValue) => {
       const { render, preview } = getRegisterComponents(element.componentsKey);
-      const RenderCom = render;
       const comProps = element.props;
-
-      console.log(element.props);
+      const formModel = element.props.formModel || formValue
+      const RenderCom = render;
       return (
         <div style={{ position: "relative" }}>
           <div
@@ -46,15 +37,14 @@ export default defineComponent({
             onClick={(e) => {
               e.stopPropagation();
               editStore.setCurrentComponents(element)
-              // editComdata.value = element;
-              //当前的数据和key传递给右侧
             }}
             {...comProps}
+            formModel={formModel}
             v-slots={{
               default: () => {
                 return (
-                  element.type !== "normal" &&
-                  NestedDraggable22(element.childrens)
+                  element.type !== "normal" ?
+                    NestedDraggable22(element.childrens, formModel) : ''
                 );
               },
             }}
@@ -64,17 +54,19 @@ export default defineComponent({
       );
     };
 
-    const NestedDraggable22 = (list) => {
+    const NestedDraggable22 = (list, formModel) => {
       return (
         <draggable
           class="dragArea"
           list={list}
           group={{ name: "g1" }}
-          // item-key="uid"
-
+          item-key="uid"
+          onSort={() => {
+            editStore.setPageConfig(stateJson.pageObj)
+          }}
           v-slots={{
             item: (listItem) => {
-              return NestedDraggableItem(listItem);
+              return NestedDraggableItem(listItem, formModel);
             },
           }}
         ></draggable>
@@ -85,8 +77,9 @@ export default defineComponent({
       return (
         <Layout>
           <LayoutContent class="edit-content-main">
+
             {stateJson.pageObj && NestedDraggable22(stateJson.pageObj.childrens)}
-            {JSON.stringify(stateJson)}
+            {JSON.stringify(stateJson.pageObj)}
           </LayoutContent>
         </Layout>
       );

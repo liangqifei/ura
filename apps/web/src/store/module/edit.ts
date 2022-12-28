@@ -4,7 +4,6 @@ import { ComponentsItem } from '../../lib'
 export const useEditStore = defineStore('editConfig', {
   state: () => {
     const data = localStorage.getItem('edit_store')
-    debugger
     return {
       currentComponents: {} as ComponentsItem,
       currentPageConfig: data ? JSON.parse(data)?.currentPageConfig : {

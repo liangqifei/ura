@@ -6,7 +6,7 @@ import { registerComponents } from "./use-register";
 
 registerComponents({
   componentsKey: "ura-button",
-  render: <UraButton></UraButton>,
+  render: UraButton,
   type: "block",
   props: {
     type: "primary",
@@ -14,39 +14,49 @@ registerComponents({
   },
   preview: {
     text: "按钮组件",
-    type: "primary",
   },
 });
 
 registerComponents({
   componentsKey: "ura-input",
-  render: <UraInput />,
+  render: UraInput,
   type: "normal",
   props: {
+    hasFormItem: false,
+    formItemProps: {
+      label: 'xxxx',
+    },
+    modelName: 'aaaa'
   },
   preview: {
     text: "输入框组件",
-    disabled: true
   },
 });
 
 registerComponents({
   componentsKey: "ura-row",
   type: "block",
-  render: <Row />,
+  render: Row,
   childrens: [],
-  props: {},
+  props: {
 
+  },
   preview: {
-    text: "Dragger容器组件",
+    text: "Row容器组件",
   },
 });
 
 registerComponents({
   componentsKey: "ura-form",
   type: "block",
-  props: {},
-  render: <Form />,
+  props: {
+    name: '表单名称',
+    formModel: {},
+    layout: 'vertical',
+    labelWrap: true,
+    labelAlign: 'right'
+  },
+  render: Form,
   childrens: [],
   preview: {
     text: "Form容器组件",

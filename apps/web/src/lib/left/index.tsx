@@ -1,3 +1,4 @@
+import { cloneDeep } from "lodash-es";
 import { defineComponent } from "vue";
 import draggable from "vuedraggable";
 import {
@@ -16,7 +17,6 @@ export default defineComponent({
           {/* {NestedDraggable22(headerList)} */}
           {headerList.map((config, index) => {
             const { preview, render } = getRegisterComponents(config.componentsKey);
-            const RenderEle = render //({ ...preview })
             return (
               <div class="left-edit-card">
                 <div class="title">{preview.text}</div>
@@ -26,10 +26,17 @@ export default defineComponent({
                     sort={false}
                     group={{ name: "g1", pull: "clone", put: false }}
                     item-key="index"
+                    clone={(com) => {
+                      const sss = cloneDeep(com)
+                      return {
+                        uid: new Date().getTime(),
+                        ...sss
+                      };
+                    }}
                     v-slots={{
                       item: ({ }) => {
                         return <div style='padding:10px;border:solid 1px #000'>
-                          <RenderEle {...preview}></RenderEle>
+                          {preview.text}
                         </div>;
                       },
                     }}
